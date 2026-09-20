@@ -57,32 +57,3 @@ def reescalar_imagen(imagen, s, mode='bilineal'):
         salida = salida.reshape((H_out, W_out))
         
     return np.clip(salida, 0, 255).astype(imagen.dtype)
-
-
-## Probando
-import matplotlib.pyplot as plt
-
-imagen_original = plt.imread('l.png')
-
-factores = [0.6, 0.8, 1.4, 1.8]
-
-fig, axes = plt.subplots(len(factores), 3, figsize=(15, 5 * len(factores)))
-
-for i, s in enumerate(factores):
-    res_vecino = reescalar_imagen(imagen_original, s, mode='vecino')
-    res_bilineal = reescalar_imagen(imagen_original, s, mode='bilineal')
-    
-    axes[i, 0].imshow(imagen_original, cmap='gray' if imagen_original.ndim == 2 else None)
-    axes[i, 0].set_title("Imagen Original")
-    axes[i, 0].axis('off')
-    
-    axes[i, 1].imshow(res_vecino, cmap='gray' if res_vecino.ndim == 2 else None)
-    axes[i, 1].set_title(f"Vecino más cercano (s={s})")
-    axes[i, 1].axis('off')
-    
-    axes[i, 2].imshow(res_bilineal, cmap='gray' if res_bilineal.ndim == 2 else None)
-    axes[i, 2].set_title(f"Bilineal (s={s})")
-    axes[i, 2].axis('off')
-
-plt.tight_layout()
-plt.show()
