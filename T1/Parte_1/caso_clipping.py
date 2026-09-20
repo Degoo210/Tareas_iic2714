@@ -28,8 +28,6 @@ axes[0, 0].set_title("Original")
 axes[0, 1].imshow(aumentar)
 axes[0, 1].set_title("Aumentar rojos (LCH con m=3)")
 
-
-
 for ax in axes.flatten():
     ax.axis('off')
 
